@@ -6,43 +6,82 @@ public class Pizza {
     private Boolean isVeg;
     private String bill;
 
-    public Pizza(Boolean isVeg) {
+    private boolean cheeseAdded;
+    private boolean toppingsAdded;
+    private boolean bagAdded;
+    private boolean billGenerated;
+
+
+    public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
-        this.price = isVeg ? 300 : 400;
-        this.bill = "";
+        // your code goes here
+        if(this.isVeg==true){
+            this.price+=300;
+            this.bill="Base Price Of The Pizza: 300\n";
+        }else{
+            this.price+=400;
+            this.bill="Base Price Of The Pizza: 400\n";
+        }
     }
 
-    public int getPrice() {
+    public int getPrice(){
         return this.price;
     }
 
-    public void addExtraCheese() {
-        if (this.bill.contains("Extra Cheese Added")) {
+    public void addExtraCheese(){
+//        if(this.bill.contains("Extra Cheese Added:")){
+//            return;
+//        }
+        if(this.cheeseAdded){
             return;
         }
-        this.price += 80;
-        this.bill += "Extra Cheese Added: 80\n";
+        // your code goes here
+        this.price+=80;
+        this.cheeseAdded=true;
+        this.bill+="Extra Cheese Added: 80\n";
     }
 
-    public void addExtraToppings() {
-        if (this.bill.contains("Extra Toppings Added")) {
+    public void addExtraToppings(){
+//        if(this.bill.contains("Extra Toppings Added:")){
+//            return;
+//        }
+        if(this.toppingsAdded){
             return;
         }
-        this.price += (isVeg) ? 70 : 120;
-        this.bill += "Extra Toppings Added: " + ((isVeg) ? 70 : 120) + "\n";
+        this.toppingsAdded=true;
+        // your code goes here
+        if(this.isVeg==true){
+            this.price+=70;
+            this.bill+="Extra Toppings Added: 70\n";
+        }else{
+            this.bill+="Extra Toppings Added: 120\n";
+            this.price+=120;
+        }
     }
 
-    public void addTakeaway() {
-        if (this.bill.contains("Paperbag Added")) {
+    public void addTakeaway(){
+//        if(this.bill.contains("Paperbag Added:")){
+//            return;
+//        }
+        if(this.bagAdded){
             return;
         }
-        this.price += 20;
-        this.bill += "Paperbag Added: 20\n";
+        this.bagAdded=true;
+        // your code goes here
+        this.price+=20;
+        this.bill+="Paperbag Added: 20\n";
     }
 
-    public String getBill() {
-        this.bill = "Base Price Of The Pizza: " + price + "\n" + this.bill;
-        this.bill += "Total Price: " + price;
+    public String getBill(){
+        // your code goes here
+//        if(this.bill.contains("Total Price:")){
+//            return this.bill;
+//        }
+        if(this.billGenerated){
+            return this.bill;
+        }
+        this.billGenerated = true;
+        this.bill+="Total Price: " + this.price+"\n";
         return this.bill;
     }
 }
